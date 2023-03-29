@@ -82,5 +82,8 @@
  *
  * clang: https://clang.llvm.org/docs/AttributeReference.html#diagnose_as_builtin
  */
-#define __diagnose_as(builtin...)	__attribute__((__diagnose_as_builtin__(builtin)))
-
+#  if defined(__clang__)
+#    define __diagnose_as(builtin...)
+#  else
+#    define __diagnose_as(builtin...)	__attribute__((__diagnose_as_builtin__(builtin)))
+#  endif
